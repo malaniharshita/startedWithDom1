@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+        <form onsubmit="savetoLocal(event)">
+          <h1>Add User</h1>
+         
+            <label>Name:</label>
+            <input type="text" name="username" required>
+          
+          
+            <label>Email:</label>
+            <input type="email" name="emailId" required>
+
+            <label>Phone Number:</label>
+            <input type="tel" name="phonenumber" required>
+          
+          <button>submit</button>
+        </form>
+    
+    <script>
+        
+        function savetoLocal(event){
+            event.preventDefault();
+            let name = event.target.username.value;
+            let email = event.target.emailId.value;
+            let number = event.target.phonenumber.value;
+            
+            // localStorage.setItem('name', name);
+            // localStorage.setItem('email', email);
+            // localStorage.setItem('Number', number);
+
+            const obj = {
+                name : name,
+                emailId : email,
+                number : number
+            }
+            localStorage.setItem('useretails', JSON.stringify(obj));
+        }
+        
+
+    </script>
+</body>
+</html>
