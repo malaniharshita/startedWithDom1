@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+        <form onsubmit="savetoLocal(event)">
+        <h1>Add User</h1>
+          <div>
+          <label>Name:</label>
+          <input type="text" name="username" required>
+          </div>
+        
+          <div>
+          <label>Email:</label>
+          <input type="email" name="emailId" required>
+          </div>
+          
+          <div>
+          <label>Phone Number:</label>
+          </div>
+          
+          <div>
+          <input type="tel" name="phonenumber" required>
+          </div>
+        <button value="Submit">submit</button>
+      </form>
+      
+
+      <ul id="ListOfitems">
+        
+      </ul> 
+      
+        <script>
+        function savetoLocal(event){
+            event.preventDefault();
+            let name = event.target.username.value;
+            let email = event.target.emailId.value;
+            let number = event.target.phonenumber.value;
+            
+            // localStorage.setItem('name', name);
+            // localStorage.setItem('email', email);
+            // localStorage.setItem('Number', number);
+
+            const obj = {
+                name : name,
+                emailId : email,
+                number : number
+            }
+            localStorage.setItem('userdetails', JSON.stringify(obj));
+            showUserOnScreen(obj);
+        }
+
+        function showUserOnScreen(obj){
+            //one way doing this--->
+            // const parentEle = document.getElementById('ListOfitems');
+            // parentEle.innerHTML = `<li>${obj.name} - ${obj.emailId} - ${obj.number}</li>`;
+
+            //another way---->
+            const parentEle = document.getElementById('ListOfitems');
+            const childEle = document.createElement('li');
+            childEle.textContent = obj.name + " - " + obj.emailId + " - " + obj.number;
+
+            const delButton = document.createElement('input');
+            delButton.type = 'button';
+            delButton.value = 'Delete';
+
+            delButton.onclick = () => {
+                localStorage.removeItem('userdetails');
+                parentEle.removeChild(childEle);
+            }
+
+            childEle.appendChild(delButton);
+
+            parentEle.appendChild(childEle);
+        }
+            
+    </script>
+</body>
+</html>
